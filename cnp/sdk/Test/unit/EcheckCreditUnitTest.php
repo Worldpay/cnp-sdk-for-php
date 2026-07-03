@@ -78,11 +78,20 @@ class EcheckCreditUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'cnpTxnId' =>'123123',
             'id' => 'id',
-            'secondaryAmount' => '2000');
+            'secondaryAmount' => '2000', 'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),);
         $mock = $this->getMock('cnp\sdk\CnpXmlMapper');
         $mock->expects($this->once())
             ->method('request')
-            ->with($this->matchesRegularExpression('/.*<secondaryAmount>2000.*/'));
+            ->with($this->matchesRegularExpression('/.*<secondaryAmount>2000.*<identityBundle>.*/'));
 
         $cnpTest = new CnpOnlineRequest();
         $cnpTest->newXML = $mock;

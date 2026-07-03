@@ -22,27 +22,28 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace cnp\sdk;
-use cnp\sdk\exceptions\cnpSDKException;
-use DOMDocument;
+namespace cnp\sdk\Test\functional;
 
-class Checker
+use cnp\sdk\CnpOnlineRequest;
+use cnp\sdk\CommManager;
+use cnp\sdk\XmlParser;
+
+
+class DpoQueryBalanceTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @param $request
-     * @return bool
-     * @throws cnpSDKException
-     */
-    public static function validateXML($request){
-        $xml = new DOMDocument();
-        $xml->loadXML($request);
-        $filepath = __DIR__ . "/schema/SchemaCombined_v12.50.xsd";
-        $result =  $xml->schemaValidate( $filepath);
 
-        if(!$result)
-            throw new cnpSDKException("Fatal ERROR: Invalid XML Request!");
+    public static function setUpBeforeClass()
+    {
+        CommManager::reset();
+    }
 
+    public function test_simple_QueryDpoWalletBalance()
+    {
+        $hash_in = array('id' => 'id');
 
-        return $result;
+        $initialize = new CnpOnlineRequest();
+        $queryeDpoBalancResponse = $initialize->queryDpoWalletBalance($hash_in);
+        $response = XmlParser::getNode($queryeDpoBalancResponse, 'response');
+        $this->assertEquals('350', $response);
     }
 }

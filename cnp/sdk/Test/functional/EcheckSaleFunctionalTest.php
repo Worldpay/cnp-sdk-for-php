@@ -169,7 +169,17 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
             'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'vantiv.com'),
             'customBilling' => array('city' => 'Boston', 'descriptor' => 'descriptor'),
             'merchantData' => array('campaign' => 'camping'),
-            'customIdentifier' => 'identifier'
+            'customIdentifier' => 'identifier',
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),
         );
 
         $initialize = new CnpOnlineRequest();

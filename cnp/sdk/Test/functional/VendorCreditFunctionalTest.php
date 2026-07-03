@@ -22,14 +22,13 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace cnp\sdk\Test\functional;
 
 use cnp\sdk\CnpOnlineRequest;
 use cnp\sdk\CommManager;
 use cnp\sdk\XmlParser;
 
 
-class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
+class VendorCreditFunctionalTest extends \PHPUnit_Framework_TestCase
 {
 
     public static function setUpBeforeClass()
@@ -40,28 +39,31 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     public function test_simple_auth_with_card()
     {
         $hash_in = array('id' => 'id',
-            'card' => array('type' => 'VI',
-                'number' => '4100000000000000',
-                'expDate' => '1213',
-                'cardValidationNum' => '1213'),
-            'id' => '1211',
-            'orderId' => '22@33',
-            'reportGroup' => 'Planets',
-            'orderSource' => 'ecommerce',
-            'businessIndicator'=>'agentCashOut',
-            'accountFundingTransactionData' => array(
-                'receiverLastName' =>'Smith',
-                'receiverState' => 'AZ',
-                'receiverCountry' => 'USA',
-              /*  'receiverAccountNumber' => '1234567890',*/
-                'receiverAccountNumberCnpToken' => '12344444444444',
-                'accountFundingTransactionType' => 'walletTransfer',
-                'receiverAccountNumberType' => 'cardAccount'
-                ),
-            'amount' => '1512');
+            'rtp'=>true,
+            'fundingSubmerchantId' => '2111',
+            'vendorName' => '001',
+            'fundsTransferId' => '12345678',
+            'amount' => '13',
+            'accountInfo' => array(
+                'accType' => 'Checking',
+                'accNum' => '12345657890',
+                'routingNum' => '123456789',
+                'checkNum' => '123455'
+            ),
+            'vendorAddress' => array(
+                'addressLine1' => '2 Main St.',
+                'addressLine2' => 'Apt. 222',
+                'addressLine3' => 'NA',
+                'city' => 'Riverside',
+                'state' => 'RI',
+                'zip' => '02915',
+                'country' => 'US'),
+
+        );
+
 
         $initialize = new CnpOnlineRequest();
-        $authorizationResponse = $initialize->authorizationRequest($hash_in);
+        $authorizationResponse = $initialize->vendorCredit($hash_in);
         $response = XmlParser::getNode($authorizationResponse, 'response');
         $this->assertEquals('000', $response);
         $location = XmlParser::getNode($authorizationResponse, 'location');
@@ -1346,7 +1348,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'conversionAffiliateId' => 'Test',
             'orderId' => '22@33',
             'reportGroup' => 'Planets',
-            'orderSource' => 'androidpay',
+            'orderSource' => 'ecommerce',
             'orderChannel' => 'SCAN_AND_GO',
             'fraudCheckAction' => 'DECLINED_NEED_FRAUD_CHECK',
             'amount' => '0',
@@ -1412,7 +1414,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'id' => '1211',
             'orderId' => '22@33',
             'reportGroup' => 'Planets',
-            'orderSource' => 'androidpay',
+            'orderSource' => 'ecommerce',
             'businessIndicator'=>'agentCashOut',
             'accountFundingTransactionData' => array(
                 'receiverLastName' =>'Smith',
@@ -1445,7 +1447,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'id' => '1211',
             'orderId' => '22@33',
             'reportGroup' => 'Planets',
-            'orderSource' => 'amazonpay',
+            'orderSource' => 'ecommerceDataOnly',
             'businessIndicator'=>'agentCashOut',
             'accountFundingTransactionData' => array(
                 'receiverLastName' =>'Smith',

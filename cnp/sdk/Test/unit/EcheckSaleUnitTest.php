@@ -83,7 +83,10 @@ class EcheckSaleUnitTest extends \PHPUnit_Framework_TestCase
     			'secondaryAmount' => '2000',
     			'orderSource'=>'ecommerce',
     			'billToAddress' => array(),
-    			'echeck' => array('accType'=>'Checking','routingNum'=>'123123123','accNum'=>'12345657890','checkNum'=>'123455','echeckCustomerId'=>'1234567','accountId'=>'012345'));
+    			'echeck' => array('accType'=>'Checking','routingNum'=>'123123123','accNum'=>'12345657890','checkNum'=>'123455','echeckCustomerId'=>'1234567','accountId'=>'012345'),
+            'identityBundle' => array('merchantId' => '12222','entityId' => '234567','entityReference' => '23475','resourceId' => '67806','resourceReference' => '231457', 'commandId' => '09765', 'commandReference' => '5679','orderReference' => '223555',
+            ),
+            );
     	
     	$mock = $this->getMock('cnp\sdk\CnpXmlMapper');
     	$mock->expects($this->once())

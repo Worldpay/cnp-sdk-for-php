@@ -39,7 +39,17 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array('id' => 'id',
             'cnpTxnId' => '123456789012345678',
-            'amount' => '1000');
+            'amount' => '1000',
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),);
 
         $initialize = new CnpOnlineRequest();
         $echeckCreditResponse = $initialize->echeckCreditRequest($hash_in);
@@ -84,7 +94,18 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderId' => '12345',
             'orderSource' => 'ecommerce',
             'echeckToken' => array('accType' => 'Checking', 'cnpToken' => '1234565789012', 'routingNum' => '123456789', 'checkNum' => '123455'),
-            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'vantiv.com'));
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'vantiv.com'),
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),
+            );
 
         $initialize = new CnpOnlineRequest();
         $echeckCreditResponse = $initialize->echeckCreditRequest($hash_in);
@@ -101,7 +122,18 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
             'verify' => 'true',
             'orderId' => '12345',
             'orderSource' => 'ecommerce',
-            'echeckToken' => array('accType' => 'Checking', 'cnpToken' => '1234565789012', 'routingNum' => '123456789', 'checkNum' => '123455'));
+            'echeckToken' => array('accType' => 'Checking', 'cnpToken' => '1234565789012', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),
+            );
 
         $initialize = new CnpOnlineRequest();
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');

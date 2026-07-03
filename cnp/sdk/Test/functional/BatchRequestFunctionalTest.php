@@ -425,7 +425,17 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
             'cnpTxnId' => '12345678000',
             'reportGroup' => 'Planets',
             'orderSource' => 'ecommerce',
-            'amount' => '123'
+            'amount' => '123',
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),
         );
         $batch_request = new BatchRequest ($this->direct);
         $batch_request->addEcheckRedeposit($hash_in);
@@ -1018,7 +1028,17 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderId' => '2111',
             'reportGroup' => 'Planets',
             'orderSource' => 'ecommerce',
-            'amount' => '123'
+            'amount' => '123',
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),
         );
         $batch_request = new BatchRequest ($this->direct);
         $batch_request->addEcheckCredit($hash_in);
@@ -1441,7 +1461,17 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
                 'city' => 'lowell',
                 'state' => 'MA',
                 'email' => 'vantiv.com'
-            )
+            ),
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),
         );
         $batch->addEcheckVerification($hash_in);
 
@@ -2146,6 +2176,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $batch = new BatchRequest();
 
         $hash_in = array('id' => 'id',
+            'rtp' => 'true',
             'fundingSubmerchantId' => '2111',
             'vendorName' => '001',
             'fundsTransferId' => '12345678',
@@ -3171,7 +3202,17 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
             'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'vantiv.com'),
             'customBilling' => array('city' => 'Boston', 'descriptor' => 'descriptor'),
             'merchantData' => array('campaign' => 'camping'),
-            'customIdentifier' => 'identifier'
+            'customIdentifier' => 'identifier',
+            'identityBundle' => array(
+                'merchantId' => '12222',
+                'entityId' => '234567',
+                'entityReference' => '23475',
+                'resourceId' => '67806',
+                'resourceReference' => '231457',
+                'commandId' => '09765',
+                'commandReference' => '5679',
+                'orderReference' => '223555',
+            ),
         );
 
         $batch->addEcheckSale($hash_in);

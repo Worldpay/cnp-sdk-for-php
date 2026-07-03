@@ -1482,7 +1482,7 @@
 
     <!--cnpRecurring-->
 
-   <!-- <xs:include schemaLocation="cnpCommon_v12.48.xsd" />-->
+   <!-- <xs:include schemaLocation="cnpCommon_v12.50.xsd" />-->
 
     <xs:element name="recurringTransaction" type="xp:recurringTransactionType" abstract="true" />
     <xs:element name="recurringTransactionResponse" type="xp:recurringTransactionResponseType" abstract="true" />
@@ -3414,6 +3414,7 @@
                             <xs:element ref="xp:customBilling" minOccurs="0"/>
                             <xs:element name="merchantData" type="xp:merchantDataType" minOccurs="0"/>
                             <xs:element name="customIdentifier" type="xp:string15Type" minOccurs="0"/>
+                            <xs:element ref="xp:identityBundle" minOccurs="0"/>
                         </xs:sequence>
                     </xs:choice>
                 </xs:extension>
@@ -3433,6 +3434,7 @@
                                 <xs:element name="secondaryAmount" type="xp:transactionAmountType" minOccurs="0"/>
                                 <xs:element ref="xp:customBilling" minOccurs="0"/>
                                 <xs:element name="customIdentifier" type="xp:string15Type" minOccurs="0"/>
+                                <xs:element ref="xp:identityBundle" minOccurs="0"/>
                             </xs:sequence>
                             <xs:sequence>
                                 <xs:element name="orderId" type="xp:string256Type"/>
@@ -3447,6 +3449,7 @@
                                 <xs:element ref="xp:customBilling" minOccurs="0"/>
                                 <xs:element name="merchantData" type="xp:merchantDataType" minOccurs="0"/>
                                 <xs:element name="customIdentifier" type="xp:string15Type" minOccurs="0"/>
+                                <xs:element ref="xp:identityBundle" minOccurs="0"/>
                             </xs:sequence>
                         </xs:choice>
                     </xs:sequence>
@@ -3632,6 +3635,7 @@
                         </xs:choice>
                         <xs:element name="merchantData" type="xp:merchantDataType" minOccurs="0"/>
                         <xs:element name="customIdentifier" type="xp:string15Type" minOccurs="0"/>
+                        <xs:element ref="xp:identityBundle" minOccurs="0"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
@@ -3810,6 +3814,10 @@
             <xs:enumeration value="applepay"/>
             <xs:enumeration value="androidpay"/>
             <xs:enumeration value="ecommerceDataOnly"/>
+            <xs:enumeration value="paze"/>
+            <xs:enumeration value="samsungpay"/>
+            <xs:enumeration value="amazonpay"/>
+            <xs:enumeration value="googlepay"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -5509,7 +5517,7 @@
     <xs:element name="vendorCredit" substitutionGroup="xp:transaction">
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="xp:transactionTypeWithReportGroup">
+                <xs:extension base="xp:transactionTypeWithReportGroupAndRtp">
                     <xs:choice>
                         <xs:sequence>
                             <xs:choice>
@@ -5906,6 +5914,34 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="queryDpoWalletBalance" substitutionGroup="xp:transaction">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="xp:transactionTypeWithReportGroup" />
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="queryDpoWalletBalanceResponse" substitutionGroup="xp:transactionResponse">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="xp:transactionTypeWithReportGroup">
+                    <xs:all>
+                        <xs:element name="cnpTxnId" type="xp:cnpIdType" />
+                        <xs:element name="response" type="xp:responseType" />
+                        <xs:element name="responseTime" type="xs:dateTime" />
+                        <xs:element name="message" type="xp:messageType" />
+                        <xs:element name="projectedAvailableBalance" type="xs:long" minOccurs="0"/>
+                        <xs:element name="reserveBalance" type="xs:long" minOccurs="0"/>
+                        <xs:element name="availableRtpBalance" type="xs:long" minOccurs="0"/>
+                        <xs:element name="asOfDate" type="xs:dateTime" minOccurs="0"/>
+                        <xs:element name="lastUpdatedDate" type="xs:dateTime" minOccurs="0"/>
+                    </xs:all>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="serviceStatusRequest" substitutionGroup="xp:transaction">
         <xs:complexType>
             <xs:complexContent>
@@ -5938,7 +5974,7 @@
 <!--<xs:element name="vendorCredit" substitutionGroup="xp:transaction">
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="xp:transactionTypeWithReportGroup">
+                <xs:extension base="xp:transactionTypeWithReportGroupAndRtp">
                     <xs:choice>
                         <xs:sequence>
                             <xs:choice>

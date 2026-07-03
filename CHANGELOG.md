@@ -1,5 +1,18 @@
 = CnpOnline CHANGELOG
 
+==Change Log for 12.50 (July 02,2026)
+Change: [cnpAPI v12.50]: New enumeration values-paze,samsungpay,amazonpay,googlepay added in existing enum orderSourceType.
+Change: [cnpAPI v12.50]: New request queryDpoWalletBalance is added to the online xsd
+Change: [cnpAPI v12.50]: New response queryDpoWalletBalanceResponse added to respond back for queryDpoWalletBalance
+Change: [cnpAPI v12.50]: to support queryDpoWalletBalanceResponse added mandatory elements -
+cnpTxnId (type: cnpIdType), response (type: responseType),
+responseTime (type: dateTime), message (type: messageType),
+projectedAvailableBalance (type: long),reserveBalance (type: long),
+availableRtpBalance (type: long),asOfDate (type: dateTime), lastUpdatedDate (type: dateTime)
+Change: [cnpAPI v12.50]: vendorCredit element's base type from transactionTypeWithReportGroup → transactionTypeWithReportGroupAndRtp
+Change: [cnpAPI v12.50]: In existing request type 'echeckCredit','echeckRedeposit' and 'echeckSale' existinng
+complex element 'identityBundle' is added.
+
 ==Change Log for 12.49 (February 10,2026)
 Change: [cnpAPI v12.49]: New simple element 'preferredCustomer' of type 'boolean' is added in 'authorization' and 'sale' request.
 Change: [cnpAPI v12.49]: New simple element 'preferredCustomerDecision' of type 'boolean' is added in Authorization and sale response.
